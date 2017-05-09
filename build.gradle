@@ -1,8 +1,9 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+		springBootVersion = '1.5.3.RELEASE'
 	}
 	repositories {
+		mavenLocal()
 		mavenCentral()
 		maven { url "https://repo.spring.io/snapshot" }
 		maven { url "https://repo.spring.io/milestone" }
@@ -14,13 +15,36 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'findbugs'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'io.spring.dependency-management'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+jar {
+    baseName = 'SeeWorld'
+    version = '0.0.1-SNAPSHOT'
+}
+
+task findbugs(type: FindBugs) {
+    //toolVersion = "3.0.1"
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "low"
+    classes = files("$project.buildDir/classes/main")
+    source = fileTree('src/main/java')
+    classpath = files()
+    reports {
+        xml {
+            destination "build/findbugs.xml"
+        }
+    }
+}
+
 repositories {
+	mavenLocal()
 	mavenCentral()
 	maven { url "https://repo.spring.io/snapshot" }
 	maven { url "https://repo.spring.io/milestone" }
