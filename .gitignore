@@ -3,3 +3,4 @@ build
 data
 webapp/node_modules
 src/main/resources/public
+.idea
