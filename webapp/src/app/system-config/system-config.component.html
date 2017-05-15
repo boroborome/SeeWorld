@@ -1,0 +1,15 @@
+<div *ngIf="wrapper">
+  <h2>System Config</h2>
+  <div><label>Start Url: </label><input [(ngModel)]="wrapper.config.startUrl" placeholder=""/></div>
+  <div>
+    <label>Domain Scope: </label>
+    <textarea
+      [(ngModel)]="wrapper.domainScopeUI"
+      appCombineLines
+      keywordFormat
+      keywordLength
+    ></textarea>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>

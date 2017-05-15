@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard.component';
 import { HeroesComponent }     from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService }         from './hero.service';
+import {SystemConfigComponent} from "./system-config/system-config.component";
+import {SystemConfigService} from "./api/system-config.service";
 
 @NgModule({
   imports:      [
@@ -23,9 +25,11 @@ import { HeroService }         from './hero.service';
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent,
+    SystemConfigComponent
   ],
   providers: [
-    HeroService
+    HeroService,
+    SystemConfigService
   ],
   bootstrap:    [ AppComponent ]
 })

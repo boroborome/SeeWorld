@@ -42,7 +42,15 @@ task findbugs(type: FindBugs) {
         }
     }
 }
+bootRun {
+	systemProperties System.properties
+	jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
+}
 
+test {
+	systemProperties System.properties
+//    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008"
+}
 repositories {
 	mavenLocal()
 	mavenCentral()

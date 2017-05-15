@@ -1,10 +1,10 @@
 package com.happy3w.seeworld.controller;
 
 import com.happy3w.seeworld.entity.Hero;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by ysgao on 09/05/2017.
  */
-@Controller
+@RestController
 @RequestMapping("api/heroes")
 public class HeroController {
 
