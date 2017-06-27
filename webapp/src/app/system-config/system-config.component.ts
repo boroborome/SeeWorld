@@ -5,6 +5,7 @@ import { SystemConfig } from '../model/system-config';
 import { SystemConfigService } from '../api/system-config.service';
 import { arrayToString, stringToArray } from '../utils';
 import 'rxjs/add/operator/switchMap';
+import { ToasterService } from 'angular2-toaster';
 
 class SystemConfigWrapper {
   config: SystemConfig;
@@ -36,6 +37,7 @@ export class SystemConfigComponent implements OnInit {
   constructor(
     private configService: SystemConfigService,
     private route: ActivatedRoute,
+    private _toasterService: ToasterService,
     private location: Location
   ) {}
   ngOnInit(): void {
@@ -52,6 +54,14 @@ export class SystemConfigComponent implements OnInit {
   save(): void {
     console.log('configs:' + JSON.stringify(this.wrapper));
     this.configService.updateConfig(this.wrapper.uiToData())
-      .then(() => this.goBack());
+      .then(() => {
+        this._toasterService.pop({
+          type: 'success',
+          title: 'Success',
+          body: 'Save Config success',
+        });
+        // console.log('Save Success');
+        // this.goBack()
+      });
   }
 }

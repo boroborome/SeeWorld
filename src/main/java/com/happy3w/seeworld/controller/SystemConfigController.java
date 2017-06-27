@@ -1,6 +1,8 @@
 package com.happy3w.seeworld.controller;
 
 import com.happy3w.seeworld.entity.SystemConfig;
+import com.happy3w.seeworld.repository.SystemConfigRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,15 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/system-config")
 public class SystemConfigController {
-    private SystemConfig config = new SystemConfig();
+
+    @Autowired
+    private SystemConfigRepository systemConfigRepository;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public SystemConfig query() {
-        return config;
+        return systemConfigRepository.load();
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public SystemConfig update(@RequestBody SystemConfig config) {
-        this.config = config;
+        config.setId(SystemConfig.DefaultID);
+        systemConfigRepository.save(config);
         return config;
     }
 }
