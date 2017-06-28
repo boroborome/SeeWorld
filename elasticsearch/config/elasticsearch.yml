@@ -1,0 +1,6 @@
+network.host: 0.0.0.0
+script.inline: on
+script.indexed: on
+node.name: LocalTest
+cluster.name: elasticsearch-local
+# discovery.zen.ping.unicast.hosts: ["localhost", "10.122.12.128"]

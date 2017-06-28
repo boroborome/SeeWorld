@@ -6,3 +6,4 @@ src/main/resources/public
 .idea
 target
 derby.log
+elasticsearch/plugins
