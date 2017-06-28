@@ -10,8 +10,7 @@ if [[ ${container_id} == "" ]]; then
   then
       image_prifex=${docker_repository}/
   fi
-  esdir='/usr/share/elasticsearch'
-  docker run -d -p 9200:9200 -p 9300:9300 -v `pwd`/config:${esdir}/config -v `pwd`/data:${esdir}/data -v `pwd`/logs:${esdir}/logs -v `pwd`/plugins:${esdir}/plugins --name ${container_name} ${image_prifex}${app_image_tag}
+  docker run -d -p 4369:4369 -p 5671:5671 -p 5672:5672 -p 25672:25672 --name ${container_name} ${image_prifex}${app_image_tag}
 else
   docker start ${container_name}
 fi
