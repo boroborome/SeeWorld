@@ -19,6 +19,15 @@ public class AnalyzeJob {
 
     @RabbitHandler
     public void receiveMessage(String content) {
-        System.out.println(content);
+
+        String attribute = "href";
+        int start = content.indexOf(attribute + "=\"");
+        if (start >= 0) {
+            int end = content.indexOf("\"", start + attribute.length() + 2);
+            if (end > 0) {
+                rabbitTemplate.convertAndSend(DispatchJob.Queue, content.substring(start + attribute.length() + 2, end));
+            }
+        }
+        rabbitTemplate.convertAndSend(SaveContentJob.Queue, content);
     }
 }

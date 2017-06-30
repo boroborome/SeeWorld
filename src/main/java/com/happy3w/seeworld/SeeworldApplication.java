@@ -1,7 +1,9 @@
 package com.happy3w.seeworld;
 
 import com.happy3w.seeworld.job.AnalyzeJob;
+import com.happy3w.seeworld.job.DispatchJob;
 import com.happy3w.seeworld.job.DownloadJob;
+import com.happy3w.seeworld.job.SaveContentJob;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -69,6 +71,15 @@ public class SeeWorldApplication {
 	@Bean
 	Queue analyzeQueue() {
 		return new Queue(AnalyzeJob.Queue, false);
+	}
+
+	@Bean
+	Queue dispatchQueue() {
+		return new Queue(DispatchJob.Queue, false);
+	}
+	@Bean
+	Queue saveContentQueue() {
+		return new Queue(SaveContentJob.Queue, false);
 	}
 
 
