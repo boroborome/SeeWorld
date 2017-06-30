@@ -4,6 +4,7 @@ import com.happy3w.seeworld.SeeWorldApplication;
 import com.happy3w.seeworld.job.AnalyzeJob;
 import com.happy3w.seeworld.job.DispatchJob;
 import com.happy3w.seeworld.job.SaveContentJob;
+import com.happy3w.seeworld.util.MockUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,26 +40,10 @@ public class AnalyzeJobTest {
         Mockito.verify(rabbitTemplate, Mockito.times(2))
                 .convertAndSend(captorQueue.capture(), captorContent.capture());
 
-        verifyParameter(new ArgumentCaptor[]{captorQueue, captorContent},
+        MockUtil.verifyParameter(new ArgumentCaptor[]{captorQueue, captorContent},
                 new Object[][]{
                         {DispatchJob.Queue, "http://www.baidu.com"},
                         {SaveContentJob.Queue, content},
                 });
-    }
-
-    private void verifyParameter(ArgumentCaptor[] argumentCaptors, Object[][] expectValues) {
-        Assert.assertNotNull(argumentCaptors);
-        Assert.assertNotNull(expectValues);
-        Assert.assertTrue(argumentCaptors.length > 0);
-        Assert.assertTrue(expectValues.length > 0);
-
-        for (int row = 0, len = expectValues.length; row < len; row++) {
-            Object[] values = expectValues[row];
-            Assert.assertEquals(argumentCaptors.length, values.length);
-
-            for (int column = 0, columnCount = argumentCaptors.length; column < columnCount; column++) {
-                Assert.assertEquals(values[column], argumentCaptors[column].getAllValues().get(row));
-            }
-        }
     }
 }
